@@ -37,7 +37,6 @@ def get_one_host(name):
 def add_host():
     host = mongo.db.hosts
     data = request.json
-    print(data)
     try:
         existing_id = host.find_one({'hostname': data['hostname']}, {'_id': 1})
         data.update({'_id': existing_id['_id']})
@@ -48,6 +47,7 @@ def add_host():
 
     except (TypeError, AttributeError):
         data.update({'_id': uuid.uuid4().hex})
+        data.update({'date': datetime.datetime.utcnow()})
         host_id = host.insert(data)
 
     new_host = host.find_one({'_id': host_id})
