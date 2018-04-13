@@ -2,6 +2,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from flask_pymongo import PyMongo
+import datetime
 import uuid
 
 app = Flask(__name__)
@@ -36,18 +37,22 @@ def get_one_host(name):
 def add_host():
     host = mongo.db.hosts
     data = request.json
-    existing_id = host.find_one({'hostname': data['hostname']}, {'_id': 1})
-    if existing_id is None:
-        data.update({'_id': uuid.uuid4().hex})
-        host_id = host.insert(data)
-    else:
+    print(data)
+    try:
+        existing_id = host.find_one({'hostname': data['hostname']}, {'_id': 1})
         data.update({'_id': existing_id['_id']})
+        data.update({'date': datetime.datetime.utcnow()})
         retcode = host.update({'hostname': data['hostname']}, data)
         if retcode['updatedExisting'] is True:
             host_id = existing_id['_id']
+
+    except (TypeError, AttributeError):
+        data.update({'_id': uuid.uuid4().hex})
+        host_id = host.insert(data)
+
     new_host = host.find_one({'_id': host_id})
     output = new_host
     return jsonify({'result': output})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
