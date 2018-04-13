@@ -22,10 +22,10 @@ def get_all_hosts():
     return jsonify({'result': output})
 
 
-@app.route('/host/', methods=['GET'])
-def get_one_host(name):
+@app.route('/host/<string:hname>', methods=['GET'])
+def get_one_host(hname):
     host = mongo.db.hosts
-    s = host.find_one({'hostname': name})
+    s = host.find_one({'hostname': hname})
     if s:
         output = s
     else:

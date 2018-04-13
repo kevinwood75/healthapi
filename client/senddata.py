@@ -15,12 +15,12 @@ def send_data(**data):
 
 ######### example usage ##########
 # data to be sent to api
-# data = {'hostname': 'eqadm1.woodez.net',
-#            'vcpu': 2,
-#            'sshd': 'OK',
-#            'inthealth': 'OK',
-#            'commvault': 'NOTOK',
-#            'rootspace': 78}
+data = {'hostname': 'test',
+            'vcpu': 2,
+            'sshd': 'OK',
+            'inthealth': 'OK',
+            'commvault': 'NOTOK',
+            'rootspace': 78}
 
-# ret_code = send_data(**data)
-# print(ret_code.get('status', None))
+ret_code = send_data(**data)
+print(ret_code.get('status', None))
