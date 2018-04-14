@@ -8,7 +8,7 @@ import uuid
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'healthdb'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/healthdb'
+app.config['MONGO_URI'] = 'mongodb://192.168.2.148:27017/healthdb'
 
 mongo = PyMongo(app)
 
