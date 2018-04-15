@@ -2,3 +2,4 @@ Flask
 pymongo
 Flask-pymongo
 requests
+uwsgi
