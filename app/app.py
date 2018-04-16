@@ -21,7 +21,7 @@ def get_all_hosts():
         output.append(s)
     return jsonify({'result': output})
 
-@app.route('/testy', methods=['GET'])
+@app.route('/woods', methods=['GET'])
 def get_all_test():
     output = []
     for host in ['saltmaster1', 'docker01', 'docker02']:
