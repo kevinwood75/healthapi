@@ -1,4 +1,4 @@
-node {
+node('docker02.woodez.net') {
    def commit_id
    stage('Preperation') {
      checkout scm
