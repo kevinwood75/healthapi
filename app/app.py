@@ -8,7 +8,7 @@ import uuid
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'healthdb'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/healthdb'
+app.config['MONGO_URI'] = 'mongodb://192.168.2.148:27017/healthdb'
 
 mongo = PyMongo(app)
 
@@ -21,6 +21,14 @@ def get_all_hosts():
         output.append(s)
     return jsonify({'result': output})
 
+@app.route('/woods', methods=['GET'])
+def get_all_test():
+    output = []
+    for host in ['saltmaster1', 'docker01', 'docker02']:
+        tmp_dict = { 'hostname': host, 'status': 'ok' }
+        output.append(tmp_dict)
+    return jsonify({'result': output})
+       
 
 @app.route('/host/<string:hname>', methods=['GET'])
 def get_one_host(hname):
