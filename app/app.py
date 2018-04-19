@@ -24,7 +24,7 @@ def get_all_hosts():
 @app.route('/woods', methods=['GET'])
 def get_all_test():
     output = []
-    for host in ['saltmaster2', 'docker01', 'docker02']:
+    for host in ['saltmaster4', 'docker03', 'docker07']:
         tmp_dict = { 'hostname': host, 'status': 'ok' }
         output.append(tmp_dict)
     return jsonify({'result': output})
