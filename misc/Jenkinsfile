@@ -12,6 +12,9 @@ node('docker02.woodez.net') {
      }
    }
 
+   stage('docker stop container') {
+     sh 'docker container rm -f healthapi'
+   }
    stage('docker run container') {
      def apiContainer = docker.image("kwood475/healthapi:latest").run("--name healthapi --publish 5000:5000")
    }
